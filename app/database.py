@@ -6,8 +6,8 @@ from .config import config
 
 url = URL.create(
     drivername='postgresql+psycopg2',
-    # host=config.DB_HOST,
-    # port=config.DB_PORT,
+    host=config.DB_HOST,
+    port=config.DB_PORT,
     username=config.DB_USER,
     password=config.DB_PASSWORD,
     database=config.DB_NAME
@@ -16,4 +16,4 @@ print(url)
 
 engine  = create_engine(url)
 Base    = declarative_base()
-Session = sessionmaker(bind=engine,autoflush=True,autocommit=False)
+LocalSession = sessionmaker(bind=engine,autoflush=True,autocommit=False)
