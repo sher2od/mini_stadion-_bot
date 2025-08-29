@@ -1,14 +1,16 @@
-from .config import config
-
 from telegram.ext import (
     Updater,
-    CommandHandler
+    CommandHandler,
 )
 
+from .config import config
+from .database import engine,Base
 from .import handlers
 
+Base.metadata.create_all(engine)
+
 def run_bot() -> None:
-    updater = Updater(config.DB_TOKEN)
+    updater = Updater(config.BOT_TOKEN)
 
     dispatcher = updater.dispatcher
 
@@ -16,4 +18,3 @@ def run_bot() -> None:
 
     updater.start_polling()
     updater.idle()
-    
